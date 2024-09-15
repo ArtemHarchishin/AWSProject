@@ -16,5 +16,5 @@ phases:
       - ls -la build/libs
 artifacts:
   files:
-    - build/libs/aliakseiakharchyshyn-1.0.0-SNAPSHOT.jar
+    - build/libs/artemkharchyshyn-1.0.0-SNAPSHOT.jar
     - outputSamTemplate.yml
