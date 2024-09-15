@@ -18,7 +18,7 @@ export const lambdaHandler = async (event, context) => {
         };
     }
 
-    //console.log(event.Records);
+    console.log(event.Records);
 
     const processed = await processRecords(event.Records);
 
