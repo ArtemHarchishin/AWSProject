@@ -1,0 +1,28 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Description: SQS to SNS.
+
+Resources:
+  Function:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: scripts/
+      Handler: app.lambdaHandler
+      Runtime: nodejs20.x
+      Architectures:
+        - x86_64
+      Timeout: 10
+      Policies:
+        - arn:aws:iam::650251727448:policy/FullAccessCloudWatch
+        - arn:aws:iam::650251727448:policy/FullAccessSNSPolicy
+        - arn:aws:iam::650251727448:policy/FullAccessSQSPolicy
+        - arn:aws:iam::650251727448:policy/FullAccessLambda
+      AutoPublishAlias: live
+      DeploymentPreference:
+        Type: Canary10Percent10Minutes
+      Events:
+        MySQSEvent:
+          Type: SQS
+          Properties:
+            Queue: arn:aws:sqs:us-west-2:650251727448:SNSQSTask1-UploadsNotificationQueue
+            BatchSize: 10
